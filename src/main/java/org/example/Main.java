@@ -3,6 +3,9 @@ package org.example;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -20,21 +23,76 @@ public class Main {
 
                 switch (opcion){
                     case 1:
-                        GestionLog.leerLog();
+                        boolean salir4 = false;
+                        String ficherolog="";
+                        while (salir4 == false) {
+                            try {
+                                System.out.println("Dime el nombre del archivo log que quieras cargar");
+                                ficherolog = teclado.next();
+                                Path log = Paths.get("src/" + ficherolog);
+                                if (Files.exists(log)) {
+                                    GestionLog.leerLog(ficherolog);
+                                    salir4=true;
+                                } else if (Files.notExists(log)) {
+                                    throw new ArchivoException("El archivo introducido no existe.");
+                                }
+
+                            } catch (ArchivoException e) {
+                                e.printStackTrace();
+                                System.out.println("El archivo no existe, vuelva a introducirlo de nuevo");
+
+
+                            }
+                        }
                         break;
                     case 2:
                         GestionLog.elegirNivel();
-
                         break;
                     case 3:
-                        System.out.println("Dime un nombre para el archivo xml(el .xml no hace falta que lo pongas)");
-                        String archivoxml = teclado.next();
-                        GestionLog.volcarLog(GestionLog.filtro,"src/"+archivoxml+".xml");
+                        boolean salir2 = false;
+                        String archivoxml="";
+                        while (salir2 == false) {
+                            try {
+                                System.out.println("Dime un nombre para el archivo xml(el .xml no hace falta que lo pongas)");
+                                archivoxml = teclado.next();
+                                Path xml = Paths.get("src/" + archivoxml+".xml");
+                                if (Files.exists(xml)) {
+                                    throw new ArchivoException("El archivo introducido ya existe.");
+                                } else if (Files.notExists(xml)) {
+                                    GestionLog.volcarLogXml(GestionLog.filtro, "src/" + archivoxml + ".xml");
+                                    salir2 = true;
+                                }
+
+                            } catch (ArchivoException e) {
+                                e.printStackTrace();
+                                System.out.println("El archivo ya existe, vuelva a introducirlo de nuevo");
+
+
+                            }
+                        }
                         break;
                     case 4:
-                        System.out.println("Dime un nombre para el archivo xml(el .xml no hace falta que lo pongas)");
-                        String archivojson= teclado.next();
-                        GestionLog.volcarLogJson(GestionLog.filtro, archivojson);
+                        boolean salir3 = false;
+                        String archivojson="";
+                        while (salir3 == false) {
+                            try {
+                                System.out.println("Dime un nombre para el archivo json(el .json no hace falta que lo pongas)");
+                                archivojson= teclado.next();
+                                Path json = Paths.get("src/" + archivojson+".json");
+                                if (Files.exists(json)) {
+                                    throw new ArchivoException("El archivo introducido ya existe.");
+                                } else if (Files.notExists(json)) {
+                                    GestionLog.volcarLogJson(GestionLog.filtro, archivojson);
+                                    salir3=true;
+                                }
+
+                            } catch (ArchivoException e) {
+                                e.printStackTrace();
+                                System.out.println("El archivo ya existe vuelva a introducirlo de nuevo");
+
+
+                            }
+                        }
                         break;
                     case 5:
 
