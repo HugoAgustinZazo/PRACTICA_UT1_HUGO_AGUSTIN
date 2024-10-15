@@ -88,14 +88,14 @@ public class Main {
 
                             } catch (ArchivoException e) {
                                 e.printStackTrace();
-                                System.out.println("El archivo ya existe vuelva a introducirlo de nuevo");
+                                System.out.println("El archivo ya existe, vuelva a introducirlo de nuevo");
 
 
                             }
                         }
                         break;
                     case 5:
-
+                        GestionLog.resetearFiltro(GestionLog.filtro);
                         break;
                         case 6:
                             salir = true;

@@ -125,9 +125,6 @@ public class GestionLog {
                         filtro = "ERROR";
                         salir = true;
                         break;
-                    case 5:
-                        salir = true;
-                        break;
                     default:
                         System.out.println("El numero escogido no corresponde con ninguna opcion");
                         break;
@@ -140,7 +137,7 @@ public class GestionLog {
     }
 
     public static void menuNiveles() {
-        System.out.println("Elige el nivel por el que quieras filtrar\n1-NINGUNO(muestra todos)\n2-INFO\n3-WARNING\n4-ERROR\n5-SALIR");
+        System.out.println("Elige el nivel por el que quieras filtrar\n1-NINGUNO(muestra todos)\n2-INFO\n3-WARNING\n4-ERROR");
 
     }
 
@@ -231,5 +228,12 @@ public class GestionLog {
         writer.name("Nivel").value(linea.getNivel());
         writer.name("mensaje").value(linea.getMensaje());
         writer.endObject();
+    }
+    public static void resetearFiltro(String filtro){
+        filtro="";
+        for(LineaLog linea : lineas){
+            System.out.println(linea);
+        }
+
     }
 }
