@@ -29,7 +29,7 @@ public class Main {
                             try {
                                 System.out.println("Dime el nombre del archivo log que quieras cargar");
                                 ficherolog = teclado.next();
-                                Path log = Paths.get("src/" + ficherolog);
+                                Path log = Paths.get(ficherolog);
                                 if (Files.exists(log)) {
                                     GestionLog.leerLog(ficherolog);
                                     salir4=true;
@@ -55,11 +55,11 @@ public class Main {
                             try {
                                 System.out.println("Dime un nombre para el archivo xml(el .xml no hace falta que lo pongas)");
                                 archivoxml = teclado.next();
-                                Path xml = Paths.get("src/" + archivoxml+".xml");
+                                Path xml = Paths.get(archivoxml+".xml");
                                 if (Files.exists(xml)) {
                                     throw new ArchivoException("El archivo introducido ya existe.");
                                 } else if (Files.notExists(xml)) {
-                                    GestionLog.volcarLogXml(GestionLog.filtro, "src/" + archivoxml + ".xml");
+                                    GestionLog.volcarLogXml(GestionLog.filtro, archivoxml + ".xml");
                                     salir2 = true;
                                 }
 
@@ -78,7 +78,7 @@ public class Main {
                             try {
                                 System.out.println("Dime un nombre para el archivo json(el .json no hace falta que lo pongas)");
                                 archivojson= teclado.next();
-                                Path json = Paths.get("src/" + archivojson+".json");
+                                Path json = Paths.get(archivojson+".json");
                                 if (Files.exists(json)) {
                                     throw new ArchivoException("El archivo introducido ya existe.");
                                 } else if (Files.notExists(json)) {

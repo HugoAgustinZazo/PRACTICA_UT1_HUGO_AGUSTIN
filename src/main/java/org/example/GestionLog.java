@@ -30,7 +30,7 @@ public class GestionLog {
 
     public static void leerLog(String ficherolog) {
         try {
-            Path path = Paths.get("src/"+ficherolog);
+            Path path = Paths.get(ficherolog);
             List<String> l = Files.readAllLines(path);
             String[] partes;
             int contadorlineasmalas=0;
@@ -199,11 +199,12 @@ public class GestionLog {
 
         StreamResult result = new StreamResult(new File(ficheroSalida));
         transformer.transform(source, result);
+        System.out.println("Se ha creado el fichero XML correctamente.");
 
     }
 
     public static void volcarLogJson(String filtro, String ficheroSalida) throws ParserConfigurationException, TransformerException, IOException {
-        try (JsonWriter writer = new JsonWriter(new FileWriter("src/" + ficheroSalida + ".json"))) {
+        try (JsonWriter writer = new JsonWriter(new FileWriter(ficheroSalida + ".json"))) {
             writer.setIndent("  ");
             writer.beginArray();
 
